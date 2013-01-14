@@ -1,0 +1,56 @@
+<project name="JasperReportsServerRESTClientMaven" basedir=".">
+	<target name="checkOS">
+		<condition property="isUnix">
+			<os family="unix" />
+		</condition>
+		<condition property="isWindows">
+			<os family="windows" />
+		</condition>
+	</target>
+
+	<target name="generateReportResponseJavaUnix" if="isUnix" depends="checkOS">
+		<echo>Generating java files</echo>
+		<exec executable="xjc">
+			<arg value="-d" />
+			<arg value="src/main/java" />
+			<arg value="-p" />
+			<arg value="com.mayuran19.jasperServer.client.runReport.response" />
+			<arg value="src/main/resources/runReportResponse.xsd" />
+		</exec>
+	</target>
+
+	<target name="generateReportResponseJavaWindows" if="isWindows" depends="checkOS">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="xjc" />
+			<arg value="-d" />
+			<arg value="src/main/java" />
+			<arg value="-p" />
+			<arg value="com.mayuran19.reports.jasperServer.runReport.response" />
+			<arg value="src/main/resources/input.xsd" />
+		</exec>
+	</target>
+
+	<target name="generateRunReportRequestJavaUnix" if="isUnix" depends="checkOS">
+		<echo>Generating java files</echo>
+		<exec executable="xjc">
+			<arg value="-d" />
+			<arg value="src/main/java" />
+			<arg value="-p" />
+			<arg value="com.mayuran19.jasperServer.client.runReport.request" />
+			<arg value="src/main/resources/resourceDiscriptor.xsd" />
+		</exec>
+	</target>
+
+	<target name="generateRunReportRequestJavaWindows" if="isWindows" depends="checkOS">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="xjc" />
+			<arg value="-d" />
+			<arg value="src/main/java" />
+			<arg value="-p" />
+			<arg value="com.mayuran19.jasperServer.client.runReport.request" />
+			<arg value="src/main/resources/resourceDiscriptor.xsd" />
+		</exec>
+	</target>
+</project>
